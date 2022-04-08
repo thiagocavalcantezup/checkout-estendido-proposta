@@ -21,4 +21,4 @@ server:
 
 logging:
   level:
-    '[br.com.zup.handora]': debug
+    '[br.com.zup]': debug
