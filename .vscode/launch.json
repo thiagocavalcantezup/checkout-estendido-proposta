@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-CheckoutEstendidoPropostaApplication<checkout-estendido-proposta>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "br.com.zup.checkoutestendidoproposta.CheckoutEstendidoPropostaApplication",
+      "projectName": "checkout-estendido-proposta",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
