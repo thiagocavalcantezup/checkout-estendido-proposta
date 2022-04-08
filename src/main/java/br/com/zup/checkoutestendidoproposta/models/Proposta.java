@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "propostas")
@@ -22,8 +25,10 @@ public class Proposta {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
-    private String documento;
+    @Column(nullable = false, length = 11)
+    @CPF
+    @Size(min = 11, max = 11)
+    private String cpf;
 
     @Column(nullable = false)
     private String endereco;
@@ -42,10 +47,10 @@ public class Proposta {
     @Deprecated
     public Proposta() {}
 
-    public Proposta(String nome, String documento, String endereco, @Email String email,
-                    @Positive BigDecimal salario) {
+    public Proposta(String nome, @CPF @Size(min = 11, max = 11) String cpf, String endereco,
+                    @Email String email, @Positive BigDecimal salario) {
         this.nome = nome;
-        this.documento = documento;
+        this.cpf = cpf;
         this.endereco = endereco;
         this.email = email;
         this.salario = salario;

@@ -6,6 +6,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 public class PropostaDTO {
 
@@ -13,7 +16,9 @@ public class PropostaDTO {
     private String nome;
 
     @NotBlank
-    private String documento;
+    @CPF
+    @Size(min = 11, max = 14)
+    private String cpf;
 
     @NotBlank
     private String endereco;
@@ -28,25 +33,28 @@ public class PropostaDTO {
 
     public PropostaDTO() {}
 
-    public PropostaDTO(@NotBlank String nome, @NotBlank String documento, @NotBlank String endereco,
-                       @NotBlank @Email String email, @NotNull @Positive BigDecimal salario) {
+    public PropostaDTO(@NotBlank String nome, @NotBlank @CPF @Size(min = 11, max = 14) String cpf,
+                       @NotBlank String endereco, @NotBlank @Email String email,
+                       @NotNull @Positive BigDecimal salario) {
         this.nome = nome;
-        this.documento = documento;
+        this.cpf = cpf;
         this.endereco = endereco;
         this.email = email;
         this.salario = salario;
     }
 
     public Proposta toModel() {
-        return new Proposta(nome, documento, endereco, email, salario);
+        String novoCpf = cpf.replaceAll("[^0-9]", "");
+
+        return new Proposta(nome, novoCpf, endereco, email, salario);
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getDocumento() {
-        return documento;
+    public String getCpf() {
+        return cpf;
     }
 
     public String getEndereco() {
